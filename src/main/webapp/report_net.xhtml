@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<f:view>
+    <h:head>
+        <title>Neues Geisternetz melden</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+
+    <h:body>
+        <div class="card">
+            <h1>Neues Geisternetz melden</h1>
+            <h:form>
+                <h2>Angaben zum Netz</h2>
+                <div class="form-group">
+                    <h:outputLabel for="standort"
+                                   value="Standort (GPS / Beschreibung):*"
+                                   styleClass="form-label"/>
+                    <h:inputText id="standort"
+                                 value="#{reportNetBean.newNet.standort}"
+                                 required="true"
+                                 requiredMessage="Bitte geben Sie einen Standort an."
+                                 styleClass="form-input"/>
+                    <h:message for="standort" styleClass="errorMessage"/>
+                </div>
+
+                <div class="form-group">
+                    <h:outputLabel for="groesse"
+                                   value="Geschätzte Größe:*"
+                                   styleClass="form-label"/>
+                    <h:inputText id="groesse"
+                                 value="#{reportNetBean.newNet.groesse}"
+                                 required="true"
+                                 requiredMessage="Bitte geben Sie eine Größe an."
+                                 styleClass="form-input"/>
+                    <h:message for="groesse" styleClass="errorMessage"/>
+                </div>
+
+                <h2>Angaben zur meldenden Person (Optional)</h2>
+                <div class="form-group">
+                    <h:outputLabel for="melderName" value="Ihr Name:" styleClass="form-label"/>
+                    <h:inputText id="melderName"
+                                 value="#{reportNetBean.reporter.name}"
+                                 styleClass="form-input"/>
+                    <h:message for="melderName" styleClass="errorMessage"/>
+                </div>
+
+                <div class="form-group">
+                    <h:outputLabel for="melderTelefon"
+                                   value="Ihre Telefonnummer (für Rückfragen):"
+                                   styleClass="form-label"/>
+                    <h:inputText id="melderTelefon"
+                                 value="#{reportNetBean.reporter.telefonnummer}"
+                                 styleClass="form-input"/>
+                    <h:message for="melderTelefon" styleClass="errorMessage"/>
+                </div>
+
+                <h:commandButton value="Netz melden"
+                                 action="#{reportNetBean.saveNet}"
+                                 styleClass="form-submit nav-button-primary" />
+
+                <h:messages globalOnly="true"
+                            layout="list"
+                            styleClass="errorMessages"/>
+            </h:form>
+
+            <div class="page-nav-links">
+                <h:link value="Zurück zur Startseite" outcome="index"/>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Ghost Net Fishing App</title>
+    <h:outputStylesheet name="/css/style.css" />
+</h:head>
+<h:body>
+    <div class="card"> <h1>Willkommen zur Ghost Net Fishing App!</h1>
+
+        <p class="description">
+            Hier entsteht die Anwendung zur Meldung und Bergung von Geisternetzen.
+            <br/>  Wähle eine Aktion:
+        </p>
+
+        <div class="navigation-buttons">
+            <h:link value="Neues Netz melden"
+                    outcome="report_net"
+                    styleClass="nav-button nav-button-primary"/>
+
+            <h:link value="Netze zur Bergung anzeigen"
+                    outcome="list_nets"
+                    styleClass="nav-button nav-button-secondary"/>
+
+            <h:link value="Zugewiesene Bergungen anzeigen"
+                    outcome="assigned_nets"
+                    styleClass="nav-button nav-button-secondary"/>
+        </div>
+
+    </div> </h:body>
+</html>

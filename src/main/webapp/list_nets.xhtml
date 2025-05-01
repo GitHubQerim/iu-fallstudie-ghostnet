@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<f:view>
+    <h:head>
+        <title>Zu bergende Geisternetze</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+
+    <h:body>
+        <div class="card">
+            <h1>Übersicht: Zu bergende Geisternetze</h1>
+
+            <h:form>
+                <h:dataTable value="#{netListBean.netsToRecover}"
+                             var="net"
+                             styleClass="netTable"
+                             rendered="#{not empty netListBean.netsToRecover}">
+
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputText value="#{net.id}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Standort</f:facet>
+                        <h:outputText value="#{net.standort}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Größe</f:facet>
+                        <h:outputText value="#{net.groesse}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                        <h:outputText value="#{net.status}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Gemeldet von</f:facet>
+                        <h:outputText
+                                value="#{net.meldendePerson != null ? net.meldendePerson.name : 'Anonym'}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Aktion</f:facet>
+
+                        <h:commandButton value="Übernehmen"
+                                         action="#{netListBean.assignRecovery}"
+                                         rendered="#{net.bergendePerson == null}"
+                                         styleClass="action-button-small">
+                            <f:param name="netIdToAssign" value="#{net.id}" />
+                        </h:commandButton>
+
+                        <h:outputText value="Zugewiesen an: #{net.bergendePerson.name}"
+                                      rendered="#{net.bergendePerson != null}"
+                                      style="margin-right: 5px; color: #AEAEB2;"/>
+
+                        <h:commandButton value="Geborgen"
+                                         action="#{netListBean.markAsRecovered}"
+                                         rendered="#{net.bergendePerson != null and net.status == 'Gemeldet'}"
+                                         styleClass="action-button-small">
+                            <f:param name="netIdToRecover" value="#{net.id}" />
+                        </h:commandButton>
+                    </h:column>
+
+                </h:dataTable>
+            </h:form>
+
+            <h:panelGroup rendered="#{empty netListBean.netsToRecover}">
+                <p class="description" style="text-align: left;">
+                    Aktuell gibt es keine gemeldeten Netze, die geborgen werden müssen.
+                </p>
+            </h:panelGroup>
+
+            <div class="page-nav-links">
+                <h:link value="Zurück zur Startseite" outcome="index"/>
+                |
+                <h:link value="Neues Netz melden" outcome="report_net"/>
+                |
+                <h:link value="Zugewiesene Bergungen anzeigen" outcome="assigned_nets"/>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>

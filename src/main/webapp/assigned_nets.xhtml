@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<f:view>
+    <h:head>
+        <title>Zugewiesene Bergungen</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+
+    <h:body>
+        <div class="card">
+            <h1>Übersicht: Zugewiesene Bergungen</h1>
+
+            <h:dataTable value="#{assignedNetListBean.assignedNets}"
+                         var="net"
+                         styleClass="netTable"
+                         rendered="#{not empty assignedNetListBean.assignedNets}">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{net.id}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Standort</f:facet>
+                    <h:outputText value="#{net.standort}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Größe</f:facet>
+                    <h:outputText value="#{net.groesse}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    <h:outputText value="#{net.status}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Zugewiesen an</f:facet>
+                    <h:outputText value="#{net.bergendePerson.name}" />
+                </h:column>
+            </h:dataTable>
+
+            <h:panelGroup rendered="#{empty assignedNetListBean.assignedNets}">
+                <p class="description">
+                    Aktuell sind keine Netze einer Person zur Bergung zugewiesen.
+                </p>
+            </h:panelGroup>
+
+            <div class="page-nav-links">
+                <h:link value="Zurück zur Startseite" outcome="index"/>
+                |
+                <h:link value="Netze zur Bergung anzeigen" outcome="list_nets"/>
+                |
+                <h:link value="Neues Netz melden" outcome="report_net"/>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>
