@@ -41,7 +41,6 @@ public class ReportNetBean {
     public void init() {
         newNet = new GhostNet();
         reporter = new Person();
-        // Standard-Status setzen
         newNet.setStatus("Gemeldet");
     }
 
@@ -53,7 +52,7 @@ public class ReportNetBean {
      *
      * @return Der Outcome-String für die JSF-Navigation (Weiterleitung zur Startseite).
      */
-    @Transactional // Sorgt dafür, dass die Methode in einer JTA-Transaktion läuft
+    @Transactional
     public String saveNet() {
         System.out.println("Versuche Netz zu speichern...");
         System.out.println("Netzdaten: " + newNet);
@@ -69,12 +68,9 @@ public class ReportNetBean {
                 System.out.println("Anonyme Meldung.");
             }
 
-
             newNet.setMeldendePerson(meldendePerson);
 
-
             newNet.setStatus("Gemeldet");
-
 
             em.persist(newNet);
             System.out.println("Geisternetz gespeichert: ID " + newNet.getId());
@@ -85,7 +81,6 @@ public class ReportNetBean {
 
             System.err.println("Fehler beim Speichern des Netzes: " + e.getMessage());
             e.printStackTrace();
-
 
             return null;
         }
